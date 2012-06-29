@@ -4,6 +4,9 @@ from WebCursor import WebCursor
 import sys, re, urllib, os, errno
 from BeautifulSoup import BeautifulSoup
 
+# list of tuple of baseurl of the page and
+# folder to put it into
+
 BASEURLS = [("http://icml.cc/2012/papers/","main_conference")]
 
 linkre = re.compile('([0-9]+)\.pdf')
@@ -30,7 +33,6 @@ def load(burl, folder):
         raise RuntimeError, "could not download %s" % (burl)
     
     soup = BeautifulSoup(html)
-    # days = soup.findAll(u"table", attrs={u"class": u"menu"})
     papers = soup.findAll(u"div", attrs={u"class": u"paper"})
     lencheck(papers)
     for paper in papers:
